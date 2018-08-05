@@ -1,4 +1,4 @@
-var app = function(){
+const app = function(){
   const url = 'https://newsapi.org/v2/top-headlines?country=gb&category=entertainment&apiKey=c94ead78503f432ab71fee4684f11855';
 
   makeRequest(url, requestComplete);
@@ -15,6 +15,11 @@ const makeRequest = function(url, callback){
 const populateList = function(articles){
 
   const div = document.getElementById('article-list');
+
+  const selectList = document.createElement("select");
+  selectList.setAttribute("id", "mySelect");
+
+
   articles.forEach(function(article, index){
 
     const articleImage = document.createElement('img');
@@ -24,12 +29,13 @@ const populateList = function(articles){
     articleImage.src = article.urlToImage
   }
 
+
 const articleUrl = document.createElement('a')
 articleUrl.href =  article.url;
-articleUrl.textContent = 'see more';
+articleUrl.textContent = '     see more';
 // ^use a for a href link
 
-const articleTitle = document.createElement('h1');
+const articleTitle = document.createElement('h2');
 articleTitle.innerText = article.title;
 
 
@@ -42,13 +48,22 @@ articleAuthor.innerText = article.author;
 
 
 const articleDescription = document.createElement('p');
-const description = _.unescape(article.description)
+const description = _.unescape(article.description);
+
 // ^use lodash to deal with unnecessary html
 
 articleDescription.innerText = description;
 
 // const articleDate = document.createElement('p');
 // articleDate.innerText = article.publishedAt;
+
+myDiv.appendChild(selectList);
+const option = document.createElement("option");
+option.setAttribute("value", article.source.id);
+option.text = article.source.id;
+selectList.appendChild(option);
+
+
 
 div.appendChild(articleImage);
 div.appendChild(articleUrl);
@@ -61,48 +76,46 @@ div.appendChild(articleDescription);
 
 }
 
-// const populateSelect = function(articles) {
-//   const select = document.getElementById('article-select')
-//   articles.forEach(function(article, index) {
-//     let option = document.createElement('option')
-//     option.innerText = article.source.name
-//     option.value = index
-//     select.appendChild(option)
-//
-//   })
-// }
-//
-// const getArticle = function (countries) {
-//   const selectedArticle = document.querySelector('select')
-//   selectedArticle.addEventListener('change', function() {
-//     let article = articles[this.value]
-//     saveArticle(article)
-//     // countryDetails(country)
-//   })
-// }
-//
-// const saveArticle = function(article){
-//   const jsonString = JSON.stringify(article);
-//   localStorage.setItem('Article Source', jsonString);
-// }
-//
-//
-// const requestComplete = function(){
-//   if(this.status != 200) return;
-//   const jsonString = this.responseText;
-//   const articles = JSON.parse(jsonString);
-//   populateList(articles.articles);
-//   // ^because articles array is nested within an object
-// }
+//*** Populate DropDown in order to select articles based on
+// 'name'property from API ***
 
 
 
-    window.addEventListener('load', app);
+// function sayHello(){
+//   alert('I am working ')
+//   const articleSelect = document.getElementById('article-select');
+//   // alert(object.toSource(articleSelect));
+// }
 
-// urlImage
-// url
-// name
-// title
-// author
-// description
-// publishedAt
+const populateSelector = function(articles){
+  const articleSelect = document.getElementById('article-select');
+
+  for(const i = 0; i < articles.length; i++){
+    const article = articles[i];
+    const option = document.createElement('option');
+    option.innerText = article.name;
+    option.value = i;
+    articleSelect.appendChild(option)
+  }
+  articleSelect.addEventListener('change', function(){
+    const selectedName = articles[this.value];
+    const articleName = document.getElementById('article-list');
+    articleName.innerText = selectedName.source.name;
+
+  })
+}
+// //
+
+
+
+const requestComplete = function(){
+  if(this.status != 200) return;
+  const jsonString = this.responseText;
+  const articles = JSON.parse(jsonString);
+  populateList(articles.articles);
+  // ^because articles array is nested within an object
+}
+
+
+
+window.addEventListener('load', app);
