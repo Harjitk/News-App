@@ -1,18 +1,19 @@
-
-/* .logo{
-	  /* text-align: center; */
-	  /* padding-bottom: 5px; */
-    /* width: 2000px;
-    height: 200px;
-	} */
+#heading{
+font-size: 100px;
+/* background: -webkit-linear-gradient(#eee, #333); */
+color: #342424;
+font-family: 'Lato', Arial, sans-serif;
+text-shadow: #E473FF;
+letter-spacing: 3px;
+text-align: center;
+}
 
 body{
 
 font-family: "Roboto", arial, sans-serif;
 font-size: 16px;
 color: #222;
-background: #fff;
-background-color: #F8F4FF;
+background-color: white;
 /*
 background-image: url("background1.jpeg"); */
 
@@ -22,14 +23,15 @@ img to the left
 /* and writing to the right hand side? using float */
 
 h1 {
-    color: #A6193C;
+    color: #FF2692;
     display: block;
 }
 
 p {
-  float: right;
-  text-align: right;
+  /* float: ; */
+  text-align: left;
   display: block;
+  color: #193CA6;
 
 }
 
@@ -42,22 +44,40 @@ img {
 
 
 #article-list{
-  display: flex;
-  margin: 40px 60px 60px 40px;
-  padding-right: 80px;
-  padding-left: 80px;
-  height: 500px;
+  margin: auto;
+  display: block-inline;
+  margin: auto;
+
+  /* 40px 60px 60px 40px; */
+  padding: 80px;
+  height: 100%;
   width: 700px;
-  background: white */
+  background: white;
 }
 /*
 block bring dropdown box to the top with display: block; */
 
+
+#myDiv{
+  /* background-color: #342424; */
+  background: linear-gradient(black, gray);
+  border-radius: 40px;
+  color: white;
+  padding: 25px 25px;
+  display: inline-block;
+  font-size: 18px;
+  text-align:center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  text-align: center;
+
+}
+
 h2{
-float:right
-width: 300px;
-height: 20px;
-text-align: right;
+text-align: left;
+color: #193CA6;
 }
 
 

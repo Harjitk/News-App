@@ -1,0 +1,71 @@
+
+/* .logo{
+	  /* text-align: center; */
+	  /* padding-bottom: 5px; */
+    /* width: 2000px;
+    height: 200px;
+	} */
+
+body{
+
+font-family: "Roboto", arial, sans-serif;
+font-size: 16px;
+color: #222;
+background: #fff;
+background-color: #F8F4FF;
+/*
+background-image: url("background1.jpeg"); */
+
+}
+/*
+img to the left
+/* and writing to the right hand side? using float */
+
+h1 {
+    color: #A6193C;
+    display: block;
+}
+
+p {
+  float: right;
+  text-align: left;
+  display: block;
+
+}
+
+
+img {
+  float:left
+  height: 500px;
+  width: 700px;
+}
+
+
+#article-list{
+  display: block-inline;
+  margin: 40px 60px 60px 40px;
+  padding-right: 80px;
+  padding-left: 80px;
+  height: 500px;
+  width: 700px;
+  background: white;
+}
+/*
+block bring dropdown box to the top with display: block; */
+
+h2{
+float:right
+width: 300px;
+height: 20px;
+text-align: right;
+}
+
+
+
+
+a:hover, a:focus, a:active {
+  color: #f3ac2b;s
+  outline: none;
+  text-decoration: none;
+
+}
