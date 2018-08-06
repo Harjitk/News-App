@@ -1,9 +1,9 @@
 #heading{
-font-size: 100px;
-/* background: -webkit-linear-gradient(#eee, #333); */
+font-size: 120px;
 color: #342424;
-font-family: 'Lato', Arial, sans-serif;
-text-shadow: #E473FF;
+
+font-family: "Roboto", arial, sans-serif;
+text-shadow: 3px 2px #CCCCCC;
 letter-spacing: 3px;
 text-align: center;
 }
@@ -60,7 +60,7 @@ block bring dropdown box to the top with display: block; */
 
 #myDiv{
   /* background-color: #342424; */
-  background: linear-gradient(black, gray);
+  background: linear-gradient(to right, black, gray);
   border-radius: 40px;
   color: white;
   padding: 25px 25px;
