@@ -14,54 +14,18 @@ const makeRequest = function(url, callback) {
 
 // populateList  strts here
 const populateList = function(articles) {
-    const div = document.getElementById("article-list");
 
     var unique_array = [];
 
     articles.forEach(function(article, index) {
 
         console.log(unique_array);
-
-
 //this pushes the article name to the unique array if it is not already there
 //eliminating duplicates
         if (unique_array.indexOf(article.source.name) == -1) {
             unique_array.push(article.source.name);
         }
-
-        const articleImage = document.createElement("img");
-        if (articleImage.src === null) {
-            articleImage.src = "./ENewslogo.jpeg";
-        } else {
-            articleImage.src = article.urlToImage;
-        }
-
-        const articleUrl = document.createElement("a");
-        articleUrl.href = article.url;
-        articleUrl.textContent = "see more";
-        // ^use a for a href link
-
-        const articleTitle = document.createElement("h2");
-        articleTitle.innerText = article.title;
-
-        const articleName = document.createElement("p");
-        articleName.innerText = article.source.name;
-
-        const articleAuthor = document.createElement("p");
-        articleAuthor.innerText = article.author;
-
-        const articleDescription = document.createElement("p");
-        const description = _.unescape(article.description);
-        // ^use lodash to deal with unnecessary html
-        articleDescription.innerText = description;
-
-        div.appendChild(articleImage);
-        div.appendChild(articleTitle);
-        div.appendChild(articleName);
-        div.appendChild(articleAuthor);
-        div.appendChild(articleDescription);
-        div.appendChild(articleUrl);
-    });
+      })
 
     var selectList = document.createElement("select");
     selectList.setAttribute("id", "mySelect");
@@ -73,17 +37,72 @@ const populateList = function(articles) {
         selectList.appendChild(option);
     }
 
-    selectList.addEventListener("change", populateSelect);
+    showArticles(articles);
+
+    selectList.addEventListener("change", function(){
+
+      var e = document.getElementById("mySelect");
+      var optionValue = e.options[e.selectedIndex].value;
+      console.log(optionValue);
+
+      const filteredArticles = articles.filter(function(article){
+        return article.source.name === optionValue;
+      })
+
+      showArticles(filteredArticles);
+      // saveArticles(filteredArticles);
+    });
+};
+
+const saveArtcles = function(articles){
+  //save articles to local storage;
+}
+
+
+const showArticles = function(articles){
+
+  const div = document.getElementById("article-list");
+  div.innerHTML = "";
+
+  articles.forEach(function(article){
+    const articleImage = document.createElement("img");
+    if (articleImage.src === null) {
+        articleImage.src = "./ENewslogo.jpeg";
+    } else {
+        articleImage.src = article.urlToImage;
+    }
+
+    const articleUrl = document.createElement("a");
+    articleUrl.href = article.url;
+    articleUrl.textContent = "see more";
+    // ^use a for a href link
+
+    const articleTitle = document.createElement("h2");
+    articleTitle.innerText = article.title;
+
+    const articleName = document.createElement("p");
+    articleName.innerText = article.source.name;
+
+    const articleAuthor = document.createElement("p");
+    articleAuthor.innerText = article.author;
+
+    const articleDescription = document.createElement("p");
+    const description = _.unescape(article.description);
+    // ^use lodash to deal with unnecessary html
+    articleDescription.innerText = description;
+
+    div.appendChild(articleImage);
+    div.appendChild(articleTitle);
+    div.appendChild(articleName);
+    div.appendChild(articleAuthor);
+    div.appendChild(articleDescription);
+    div.appendChild(articleUrl);
+  })
+
 };
 
 // *** Populate DropDown in order to select articles based on
 // 'name'property from API ***
-
-const populateSelect = function() {
-
-  var e = document.getElementById("mySelect");
-  var opVal = e.options[e.selectedIndex].value;
-  console.log(opVal);
 
 
 
@@ -98,12 +117,11 @@ const populateSelect = function() {
 
 
 
-};
-
-
-
-
 const requestComplete = function() {
+
+//get any articles in localstorage, parse them back into an array
+//and then call showArticles(array) with that array
+
     if (this.status != 200) return;
     const jsonString = this.responseText;
     const articles = JSON.parse(jsonString);
